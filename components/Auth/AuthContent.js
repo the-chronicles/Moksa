@@ -1,10 +1,50 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import AuthForm from "./AuthForm";
 import Colors from "../../constants/colors";
 import Header from "../UI/Texts/Header";
 import PrimaryButton from "../UI/Buttons/PrimaryButton";
+import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import FlatButton from "../UI/Buttons/FlatButton";
 
-function AuthContent() {
+function AuthContent({ isLogin, onAuthenticate }) {
+  const navigation = useNavigation();
+
+  const [credentialsInvalid, setCredentialsInvalid] = useState({
+    fullname: false,
+    email: false,
+    password: false,
+  });
+
+  function switchAuthModeHandler() {
+    if (isLogin) {
+      navigation.navigate("Signup");
+    } else {
+      navigation.navigate("Login");
+    }
+  }
+
+  function submitHandler(credentials) {
+    let { fullname, email, password } = credentials;
+
+    fullname = fullname.trim();
+    email = email.trim();
+    password = password.trim();
+
+    const emailIsInvalid = email.includes("@");
+    const passwordIsInvalid = password.length > 6;
+
+    if (!emailIsInvalid || !passwordIsInvalid) {
+      Alert.alert("Looks like you have an account");
+      setCredentialsInvalid({
+        email: !emailIsInvalid,
+        password: !passwordIsInvalid,
+      });
+      return;
+    }
+    onAuthenticate({ email, password });
+  }
+
   return (
     <>
       <View style={styles.rootScreen}>
@@ -12,18 +52,37 @@ function AuthContent() {
           <Header>Skip Login</Header>
         </View>
         <View style={styles.headerText}>
-          <Header>Access your account</Header>
+          {isLogin ? (
+            <Header>Access your account</Header>
+          ) : (
+            <Header>Save preferences, get notifications</Header>
+          )}
         </View>
         <View style={styles.authContent}>
-          <AuthForm />
+          <AuthForm
+            isLogin={isLogin}
+            onsubmit={submitHandler}
+            credentialsInvalid={credentialsInvalid}
+          />
           <View style={styles.emailPass}>
-            <Header>Email me my password</Header>
-            <PrimaryButton>Login</PrimaryButton>
+            {isLogin ? <Header>Email me my password</Header> : ""}
+            {isLogin ? (
+              <PrimaryButton>Login</PrimaryButton>
+            ) : (
+              <PrimaryButton>Create Account</PrimaryButton>
+            )}
           </View>
           <View style={styles.bottomContainer}>
-            <Text style={styles.bottomText}>
-              No account yet? Create one now
-            </Text>
+            <FlatButton onPress={switchAuthModeHandler}>
+              {isLogin
+                ? "No account yet? Create one now"
+                : "Already have an account. Log In"}
+            </FlatButton>
+            {/* <Text style={styles.bottomText}>
+              {isLogin
+                ? "No account yet? Create one now"
+                : "Already have an account. Log In"}
+            </Text> */}
           </View>
         </View>
       </View>

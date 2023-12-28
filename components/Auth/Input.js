@@ -2,7 +2,14 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 
 import Colors from "../../constants/colors";
 
-function Input({ label, keyboardType, secure, placeholder }) {
+function Input({
+  label,
+  keyboardType,
+  secure,
+  placeholder,
+  onUpdateValue,
+  value,
+}) {
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.label}>{label}</Text>
@@ -13,6 +20,8 @@ function Input({ label, keyboardType, secure, placeholder }) {
         autoCapitalize="none"
         secureTextEntry={secure}
         style={styles.input}
+        value={value}
+        onChangeText={onUpdateValue}
       />
     </View>
   );

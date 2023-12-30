@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import {
+  Image,
   ImageBackground,
   SafeAreaView,
   StyleSheet,
@@ -14,18 +15,37 @@ import { useFonts } from "expo-font";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthContent from "./components/Auth/AuthContent";
+import Onboarding from "react-native-onboarding-swiper";
+import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+
+{
+  /* <Onboarding
+  pages={[
+    {
+      backgroundColor: "#a6e4d0",
+      image: <Image source={require("./assets/images/notifications.png")} />,
+      title: "Welcome",
+      subtitle: "Welcome to the first slide of the Onboarding Swiper.",
+    },
+  ]}
+/>; */
+}
 
 const Stack = createNativeStackNavigator();
 
+
 function AuthStack() {
+ 
+
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
         headerTransparent: true,
         contentStyle: {
-          backgroundColor: Colors.primary200
-        }
+          backgroundColor: Colors.primary200,
+        },
       }}
     >
       <Stack.Screen name="Login" component={LoginScreen} />
@@ -43,10 +63,82 @@ function Navigation() {
 }
 
 export default function App() {
+  
   const [fontsLoaded] = useFonts({
     gilroy: require("./assets/fonts/Gilroy-Regular.ttf"),
     tradeGothic: require("./assets/fonts/TradeGothic LT Regular.ttf"),
   });
+  
+  const [showOnboarding, setShowOnboarding] = useState(true);
+  // const navigation = useNavigation();
+  
+  if (showOnboarding) {
+    // Display Onboarding
+    return (
+      <LinearGradient
+        colors={[Colors.primary300, Colors.primary300]}
+        style={styles.rootScreen}
+      >
+        <ImageBackground
+          source={require("./assets/images/_7D_2535.png")}
+          resizeMode="cover"
+          style={styles.rootScreen}
+          imageStyle={styles.backgroundImage}
+        >
+          <Onboarding
+          onSkip={() => setShowOnboarding(false)}
+            pages={[
+              {
+                backgroundColor: "transparent",
+                image: (
+                  <Image
+                    source={require("./assets/images/notifications.png")}
+                    style={styles.onboardingImage}
+                  />
+                ),
+                title: "Welcome",
+                subtitle:
+                  "Welcome to the first slide of the Onboarding Swiper.",
+              },
+              {
+                backgroundColor: "transparent",
+                image: (
+                  <Image
+                    source={require("./assets/images/notifications2.png")}
+                    style={styles.onboardingImage}
+                  />
+                ),
+                title: "Welcome",
+                subtitle:
+                  "Welcome to the first slide of the Onboarding Swiper.",
+              },
+              {
+                backgroundColor: "transparent",
+                image: (
+                  <Image
+                    source={require("./assets/images/notifications3.png")}
+                    style={styles.onboardingImage}
+                  />
+                ),
+                title: "Welcome",
+                subtitle:
+                  "Welcome to the first slide of the Onboarding Swiper.",
+              },
+              // Add more pages as needed
+            ]}
+            
+            onDone={() => setShowOnboarding(false)}
+            skipLabel="Skip"
+            nextLabel="Next" // Empty string to hide the next button
+            bottomBarHighlight={false}
+            bottomBarHeight={60}
+
+            
+          />
+        </ImageBackground>
+      </LinearGradient>
+    );
+  }
 
   return (
     <>
@@ -82,4 +174,19 @@ const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,
   },
+  bottomButton: {
+    backgroundColor: Colors.primary100,
+    paddingVertical: 16,
+    borderRadius: 8,
+  },
+  bottomButtonText: {
+    color: 'red',
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  // onboardingImage: {
+  //   width: 200,
+  //   height: 200,
+  // },
 });

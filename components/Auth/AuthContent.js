@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import FlatButton from "../UI/Buttons/FlatButton";
 
+
 function AuthContent({ isLogin, onAuthenticate }) {
   const navigation = useNavigation();
 

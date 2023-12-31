@@ -1,31 +1,20 @@
 import { StatusBar } from "expo-status-bar";
 import { Image, ImageBackground, SafeAreaView, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useFonts } from "expo-font";
+import { useState } from "react";
+
+import AppLoading from "expo-app-loading";
+
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+
 import Colors from "./constants/colors";
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
-import { useFonts } from "expo-font";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
-import AuthContent from "./components/Auth/AuthContent";
-import Onboarding from "react-native-onboarding-swiper";
-import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import AppLoading from "expo-app-loading";
-import CustomOnboarding from "./components/UI/CustomOnboarding";
 
-{
-  /* <Onboarding
-  pages={[
-    {
-      backgroundColor: "#a6e4d0",
-      image: <Image source={require("./assets/images/notifications.png")} />,
-      title: "Welcome",
-      subtitle: "Welcome to the first slide of the Onboarding Swiper.",
-    },
-  ]}
-/>; */
-}
+import Onboarding from "react-native-onboarding-swiper";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -40,8 +29,34 @@ function AuthStack() {
         },
       }}
     >
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Signup" component={SignupScreen} />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="Signup"
+        component={SignupScreen}
+        options={{
+          headerTransparent: true,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function AuthenticatedStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: Colors.primary500 },
+        headerTintColor: "white",
+        contentStyle: { backgroundColor: Colors.primary100 },
+      }}
+    >
+      <Stack.Screen name="Welcome" component={WelcomeScreen} />
     </Stack.Navigator>
   );
 }
@@ -49,8 +64,7 @@ function AuthStack() {
 function Navigation() {
   return (
     <NavigationContainer>
-      {/* <AuthStack /> */}
-      <CustomOnboarding />
+      <AuthStack />
     </NavigationContainer>
   );
 }
@@ -60,75 +74,73 @@ export default function App() {
     gilroy: require("./assets/fonts/Gilroy-Regular.ttf"),
     tradeGothic: require("./assets/fonts/TradeGothic LT Regular.ttf"),
   });
-  
-  
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
 
-  // const [showOnboarding, setShowOnboarding] = useState(true);
-
-  // if (showOnboarding) {
-  //   // Display Onboarding
-  //   return (
-  //     <LinearGradient
-  //       colors={[Colors.primary300, Colors.primary300]}
-  //       style={styles.rootScreen}
-  //     >
-  //       <ImageBackground
-  //         source={require("./assets/images/_7D_2535.png")}
-  //         resizeMode="cover"
-  //         style={styles.rootScreen}
-  //         imageStyle={styles.backgroundImage}
-  //       >
-  //         <Onboarding
-  //           onSkip={() => setShowOnboarding(false)}
-  //           pages={[
-  //             {
-  //               backgroundColor: "transparent",
-  //               image: (
-  //                 <Image
-  //                   source={require("./assets/images/notifications.png")}
-  //                   style={styles.onboardingImage}
-  //                 />
-  //               ),
-  //               title: "Welcome",
-  //               subtitle: "",
-  //             },
-  //             {
-  //               backgroundColor: "transparent",
-  //               image: (
-  //                 <Image
-  //                   source={require("./assets/images/notifications2.png")}
-  //                   style={styles.onboardingImage}
-  //                 />
-  //               ),
-  //               title: "Welcome",
-  //               subtitle: ".",
-  //             },
-  //             {
-  //               backgroundColor: "transparent",
-  //               image: (
-  //                 <Image
-  //                   source={require("./assets/images/notifications3.png")}
-  //                   style={styles.onboardingImage}
-  //                 />
-  //               ),
-  //               title: "Welcome",
-  //               subtitle: ".",
-  //             },
-  //             // Add more pages as needed
-  //           ]}
-  //           onDone={() => setShowOnboarding(false)}
-  //           skipLabel=""
-  //           nextLabel="" // Empty string to hide the next button
-  //           bottomBarHighlight={false}
-  //           bottomBarHeight={60}
-  //         />
-  //       </ImageBackground>
-  //     </LinearGradient>
-  //   );
+  // if (!fontsLoaded) {
+  //   return <AppLoading />;
   // }
+
+  const [showOnboarding, setShowOnboarding] = useState(true);
+
+  if (showOnboarding) {
+    return (
+      <LinearGradient
+        colors={[Colors.primary300, Colors.primary300]}
+        style={styles.rootScreen}
+      >
+        <ImageBackground
+          source={require("./assets/images/_7D_2535.png")}
+          resizeMode="cover"
+          style={styles.rootScreen}
+          imageStyle={styles.backgroundImage}
+        >
+          <Onboarding
+            onSkip={() => setShowOnboarding(false)}
+            pages={[
+              {
+                backgroundColor: "transparent",
+                image: (
+                  <Image
+                    source={require("./assets/images/notifications.png")}
+                    style={styles.onboardingImage}
+                  />
+                ),
+                title: "Welcome",
+                subtitle: "",
+              },
+              {
+                backgroundColor: "transparent",
+                image: (
+                  <Image
+                    source={require("./assets/images/notifications2.png")}
+                    style={styles.onboardingImage}
+                  />
+                ),
+                title: "Welcome",
+                subtitle: ".",
+              },
+              {
+                backgroundColor: "transparent",
+                image: (
+                  <Image
+                    source={require("./assets/images/notifications3.png")}
+                    style={styles.onboardingImage}
+                  />
+                ),
+                title: "Welcome",
+                subtitle: ".",
+              },
+              // Add more pages as needed
+            ]}
+            onDone={() => setShowOnboarding(false)}
+            skipLabel=""
+            nextLabel="" // Empty string to hide the next button
+            bottomBarHighlight={false}
+            bottomBarHeight={60}
+          />
+        </ImageBackground>
+      </LinearGradient>
+    );
+  }
 
   return (
     <>
@@ -143,9 +155,11 @@ export default function App() {
           style={styles.rootScreen}
           imageStyle={styles.backgroundImage}
         >
-          <SafeAreaView style={styles.rootScreen}>
-            <Navigation />
-            {/* <AuthContent /> */}
+          <SafeAreaView style={styles.safeAreaView}>
+            {/* <BackgrounOverlay> */}
+              <Navigation />
+              {/* <AuthContent /> */}
+            {/* </BackgrounOverlay> */}
           </SafeAreaView>
         </ImageBackground>
       </LinearGradient>

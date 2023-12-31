@@ -1,12 +1,11 @@
 import { Alert, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+
 import AuthForm from "./AuthForm";
 import Colors from "../../constants/colors";
 import Header from "../UI/Texts/Header";
-import PrimaryButton from "../UI/Buttons/PrimaryButton";
-import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import FlatButton from "../UI/Buttons/FlatButton";
-
 
 function AuthContent({ isLogin, onAuthenticate }) {
   const navigation = useNavigation();
@@ -32,6 +31,32 @@ function AuthContent({ isLogin, onAuthenticate }) {
     email = email.trim();
     password = password.trim();
 
+    // Dummy data
+    const dummyUsername = "user";
+    const dummyPassword = "password";
+
+    if (isLogin) {
+      if (email === dummyUsername && password === dummyPassword) {
+        navigation.navigate("Welcome");
+      } else {
+        Alert.alert(
+          "Incorrect Password",
+          "The password entered does not match our records. Please check it and try again.."
+        );
+      }
+    } else {
+      if (email === dummyUsername) {
+        Alert.alert("Username taken", "Please choose a different username.");
+      } else {
+        Alert.alert(
+          "Account Created",
+          "We've sent a confirmation email to the address entered. Please activate your account."
+        );
+        navigation.navigate("Welcome");
+      }
+    }
+
+    /* Main code for authentication
     const emailIsInvalid = email.includes("@");
     const passwordIsInvalid = password.length > 6;
 
@@ -44,50 +69,36 @@ function AuthContent({ isLogin, onAuthenticate }) {
       return;
     }
     onAuthenticate({ email, password });
+    */
   }
 
   return (
-    <>
-      <View style={styles.rootScreen}>
-        <View style={styles.login}>
-          <Header>Skip Login</Header>
-        </View>
-        <View style={styles.headerText}>
-          {isLogin ? (
-            <Header>Access your account</Header>
-          ) : (
-            <Header>Save preferences, get notifications</Header>
-          )}
-        </View>
-        <View style={styles.authContent}>
-          <AuthForm
-            isLogin={isLogin}
-            onsubmit={submitHandler}
-            credentialsInvalid={credentialsInvalid}
-          />
-          <View style={styles.emailPass}>
-            {isLogin ? <Header>Email me my password</Header> : ""}
-            {isLogin ? (
-              <PrimaryButton>Login</PrimaryButton>
-            ) : (
-              <PrimaryButton>Create Account</PrimaryButton>
-            )}
-          </View>
-          <View style={styles.bottomContainer}>
-            <FlatButton onPress={switchAuthModeHandler}>
-              {isLogin
-                ? "No account yet? Create one now"
-                : "Already have an account. Log In"}
-            </FlatButton>
-            {/* <Text style={styles.bottomText}>
-              {isLogin
-                ? "No account yet? Create one now"
-                : "Already have an account. Log In"}
-            </Text> */}
-          </View>
+    <View style={styles.rootScreen}>
+      <View style={styles.login}>
+        <Header>Skip Login</Header>
+      </View>
+      <View style={styles.headerText}>
+        <Header>
+          {isLogin
+            ? "Access your account"
+            : "Save preferences, get notifications"}
+        </Header>
+      </View>
+      <View style={styles.authContent}>
+        <AuthForm
+          isLogin={isLogin}
+          onSubmit={submitHandler}
+          credentialsInvalid={credentialsInvalid}
+        />
+        <View style={styles.bottomContainer}>
+          <FlatButton onPress={switchAuthModeHandler}>
+            {isLogin
+              ? "No account yet? Create one now"
+              : "Already have an account. Log In"}
+          </FlatButton>
         </View>
       </View>
-    </>
+    </View>
   );
 }
 
@@ -98,7 +109,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   login: {
-    // justifyContent: "center",
     alignItems: "flex-end",
     marginTop: 60,
     marginHorizontal: 16,
@@ -113,11 +123,6 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     backgroundColor: Colors.primary300,
-  },
-  emailPass: {
-    marginTop: 10,
-    justifyContent: "center",
-    alignItems: "flex-end",
   },
   bottomContainer: {
     flex: 1,

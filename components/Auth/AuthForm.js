@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useState } from "react";
 
 import Input from "./Input";
+import Header from "../UI/Texts/Header";
+import PrimaryButton from "../UI/Buttons/PrimaryButton";
 
-function AuthForm({ onsubmit, credentialsInvalid, isLogin }) {
+function AuthForm({ onSubmit, credentialsInvalid, isLogin }) {
   const [enteredFullName, setEnteredFullName] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
@@ -29,7 +31,7 @@ function AuthForm({ onsubmit, credentialsInvalid, isLogin }) {
   }
 
   function submitHandler() {
-    onsubmit({
+    onSubmit({
       fullname: enteredFullName,
       email: enteredEmail,
       password: enteredPassword,
@@ -39,26 +41,38 @@ function AuthForm({ onsubmit, credentialsInvalid, isLogin }) {
   return (
     <View>
       <View>
-        {!isLogin && <Input
-          label="Full Name"
-          keyboardType="default"
-          placeholder="Full Name"
-          value={enteredFullName}
-        />}
+        {!isLogin && (
+          <Input
+            label="Full Name"
+            keyboardType="default"
+            placeholder="Full Name"
+            value={enteredFullName}
+            onUpdateValue={updateInputValueHandler.bind(this, "fullname")}
+            // isInvalid={fullnameIsInvalid}
+          />
+        )}
         <Input
           label="Email Address"
           keyboardType="email-address"
           placeholder="Email Address"
-          onUpdateValue={updateInputValueHandler}
+          onUpdateValue={updateInputValueHandler.bind(this, "email")}
           value={enteredEmail}
+          isInvalid={emailIsInvalid}
         />
         <Input
           label="Password"
           secure
           placeholder="*********"
-          onUpdateValue={updateInputValueHandler}
+          onUpdateValue={updateInputValueHandler.bind(this, "password")}
           value={enteredPassword}
+          isInvalid={passwordIsInvalid}
         />
+      </View>
+      <View style={styles.emailPass}>
+        <Header>{isLogin ? "Email me my password" : ""}</Header>
+        <PrimaryButton onPress={submitHandler}>
+          {isLogin ? "Login" : "Create Account"}
+        </PrimaryButton>
       </View>
     </View>
   );
@@ -71,15 +85,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
     justifyContent: "center",
     alignItems: "flex-end",
-  },
-  bottomContainer: {
-    // flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
-  bottomText: {
-    color: "white",
-    fontSize: 16,
-    fontFamily: "gilroy",
   },
 });

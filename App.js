@@ -1,12 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  Image,
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, ImageBackground, SafeAreaView, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Colors from "./constants/colors";
 import LoginScreen from "./screens/LoginScreen";
@@ -18,6 +11,8 @@ import AuthContent from "./components/Auth/AuthContent";
 import Onboarding from "react-native-onboarding-swiper";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import AppLoading from "expo-app-loading";
+import CustomOnboarding from "./components/UI/CustomOnboarding";
 
 {
   /* <Onboarding
@@ -34,10 +29,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
-
 function AuthStack() {
- 
-
   return (
     <Stack.Navigator
       screenOptions={{
@@ -57,88 +49,86 @@ function AuthStack() {
 function Navigation() {
   return (
     <NavigationContainer>
-      <AuthStack />
+      {/* <AuthStack /> */}
+      <CustomOnboarding />
     </NavigationContainer>
   );
 }
 
 export default function App() {
-  
   const [fontsLoaded] = useFonts({
     gilroy: require("./assets/fonts/Gilroy-Regular.ttf"),
     tradeGothic: require("./assets/fonts/TradeGothic LT Regular.ttf"),
   });
   
-  const [showOnboarding, setShowOnboarding] = useState(true);
-  // const navigation = useNavigation();
   
-  if (showOnboarding) {
-    // Display Onboarding
-    return (
-      <LinearGradient
-        colors={[Colors.primary300, Colors.primary300]}
-        style={styles.rootScreen}
-      >
-        <ImageBackground
-          source={require("./assets/images/_7D_2535.png")}
-          resizeMode="cover"
-          style={styles.rootScreen}
-          imageStyle={styles.backgroundImage}
-        >
-          <Onboarding
-          onSkip={() => setShowOnboarding(false)}
-            pages={[
-              {
-                backgroundColor: "transparent",
-                image: (
-                  <Image
-                    source={require("./assets/images/notifications.png")}
-                    style={styles.onboardingImage}
-                  />
-                ),
-                title: "Welcome",
-                subtitle:
-                  "Welcome to the first slide of the Onboarding Swiper.",
-              },
-              {
-                backgroundColor: "transparent",
-                image: (
-                  <Image
-                    source={require("./assets/images/notifications2.png")}
-                    style={styles.onboardingImage}
-                  />
-                ),
-                title: "Welcome",
-                subtitle:
-                  "Welcome to the first slide of the Onboarding Swiper.",
-              },
-              {
-                backgroundColor: "transparent",
-                image: (
-                  <Image
-                    source={require("./assets/images/notifications3.png")}
-                    style={styles.onboardingImage}
-                  />
-                ),
-                title: "Welcome",
-                subtitle:
-                  "Welcome to the first slide of the Onboarding Swiper.",
-              },
-              // Add more pages as needed
-            ]}
-            
-            onDone={() => setShowOnboarding(false)}
-            skipLabel="Skip"
-            nextLabel="Next" // Empty string to hide the next button
-            bottomBarHighlight={false}
-            bottomBarHeight={60}
-
-            
-          />
-        </ImageBackground>
-      </LinearGradient>
-    );
+  if (!fontsLoaded) {
+    return <AppLoading />;
   }
+
+  // const [showOnboarding, setShowOnboarding] = useState(true);
+
+  // if (showOnboarding) {
+  //   // Display Onboarding
+  //   return (
+  //     <LinearGradient
+  //       colors={[Colors.primary300, Colors.primary300]}
+  //       style={styles.rootScreen}
+  //     >
+  //       <ImageBackground
+  //         source={require("./assets/images/_7D_2535.png")}
+  //         resizeMode="cover"
+  //         style={styles.rootScreen}
+  //         imageStyle={styles.backgroundImage}
+  //       >
+  //         <Onboarding
+  //           onSkip={() => setShowOnboarding(false)}
+  //           pages={[
+  //             {
+  //               backgroundColor: "transparent",
+  //               image: (
+  //                 <Image
+  //                   source={require("./assets/images/notifications.png")}
+  //                   style={styles.onboardingImage}
+  //                 />
+  //               ),
+  //               title: "Welcome",
+  //               subtitle: "",
+  //             },
+  //             {
+  //               backgroundColor: "transparent",
+  //               image: (
+  //                 <Image
+  //                   source={require("./assets/images/notifications2.png")}
+  //                   style={styles.onboardingImage}
+  //                 />
+  //               ),
+  //               title: "Welcome",
+  //               subtitle: ".",
+  //             },
+  //             {
+  //               backgroundColor: "transparent",
+  //               image: (
+  //                 <Image
+  //                   source={require("./assets/images/notifications3.png")}
+  //                   style={styles.onboardingImage}
+  //                 />
+  //               ),
+  //               title: "Welcome",
+  //               subtitle: ".",
+  //             },
+  //             // Add more pages as needed
+  //           ]}
+  //           onDone={() => setShowOnboarding(false)}
+  //           skipLabel=""
+  //           nextLabel="" // Empty string to hide the next button
+  //           bottomBarHighlight={false}
+  //           bottomBarHeight={60}
+  //         />
+  //       </ImageBackground>
+  //     </LinearGradient>
+  //   );
+  // }
 
   return (
     <>
@@ -180,7 +170,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   bottomButtonText: {
-    color: 'red',
+    color: "red",
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",

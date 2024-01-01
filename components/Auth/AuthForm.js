@@ -11,7 +11,7 @@ function AuthForm({ onSubmit, credentialsInvalid, isLogin }) {
   const [enteredPassword, setEnteredPassword] = useState("");
 
   const {
-    fullname: fullnameIsInvalid,
+    // fullname: fullnameIsInvalid,
     email: emailIsInvalid,
     password: passwordIsInvalid,
   } = credentialsInvalid;
@@ -48,7 +48,6 @@ function AuthForm({ onSubmit, credentialsInvalid, isLogin }) {
             placeholder="Full Name"
             value={enteredFullName}
             onUpdateValue={updateInputValueHandler.bind(this, "fullname")}
-            // isInvalid={fullnameIsInvalid}
           />
         )}
         <Input

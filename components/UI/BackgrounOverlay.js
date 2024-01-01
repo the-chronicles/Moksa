@@ -5,17 +5,17 @@ import Colors from "../../constants/colors";
 function BackgrounOverlay({ children }) {
   return (
     <LinearGradient
-      colors={[Colors.primary100, Colors.primary100]}
+      colors={[Colors.primary200, Colors.primary200]}
       style={styles.rootScreen}
     >
-      {/* <ImageBackground
+      <ImageBackground
         source={require("./assets/images/_7D_2535.png")}
         resizeMode="cover"
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
-      > */}
-      {children}
-      {/* </ImageBackground> */}
+      >
+        {children}
+      </ImageBackground>
     </LinearGradient>
   );
 }

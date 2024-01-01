@@ -14,6 +14,7 @@ import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 
 import Onboarding from "react-native-onboarding-swiper";
+import WelcomeScreen from "./screens/WelcomeScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -43,7 +44,15 @@ function AuthStack() {
           headerTransparent: true,
         }}
       />
+      <Stack.Screen
+        name="AuthenticatedStack"
+        component={AuthenticatedStack}
+        options={{
+          headerShown: false, // Hide the header of AuthenticatedStack
+        }}
+      />
     </Stack.Navigator>
+    
   );
 }
 
@@ -54,6 +63,7 @@ function AuthenticatedStack() {
         headerStyle: { backgroundColor: Colors.primary500 },
         headerTintColor: "white",
         contentStyle: { backgroundColor: Colors.primary100 },
+        headerShown: false
       }}
     >
       <Stack.Screen name="Welcome" component={WelcomeScreen} />

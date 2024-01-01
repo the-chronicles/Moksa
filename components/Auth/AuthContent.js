@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
@@ -6,9 +6,19 @@ import AuthForm from "./AuthForm";
 import Colors from "../../constants/colors";
 import Header from "../UI/Texts/Header";
 import FlatButton from "../UI/Buttons/FlatButton";
+import NewAlert from "../Alert/NewAlert";
 
 function AuthContent({ isLogin, onAuthenticate }) {
   const navigation = useNavigation();
+  const [showAlert, setShowAlert] = useState(false);
+
+  const showAlertHandler = () => {
+    setShowAlert(true);
+  };
+
+  const closeAlertHandler = () => {
+    setShowAlert(false);
+  };
 
   const [credentialsInvalid, setCredentialsInvalid] = useState({
     fullname: false,
@@ -37,12 +47,14 @@ function AuthContent({ isLogin, onAuthenticate }) {
 
     if (isLogin) {
       if (email === dummyUsername && password === dummyPassword) {
-        navigation.navigate("Welcome");
+        navigation.navigate("AuthenticatedStack");
       } else {
         Alert.alert(
           "Incorrect Password",
           "The password entered does not match our records. Please check it and try again.."
         );
+
+        // showAlertHandler();
       }
     } else {
       if (email === dummyUsername) {
@@ -98,6 +110,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
           </FlatButton>
         </View>
       </View>
+      {showAlert && <NewAlert onClose={closeAlertHandler} /> }
     </View>
   );
 }

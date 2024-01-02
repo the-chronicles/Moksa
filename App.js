@@ -15,9 +15,12 @@ import SignupScreen from "./screens/SignupScreen";
 
 import Onboarding from "react-native-onboarding-swiper";
 import WelcomeScreen from "./screens/WelcomeScreen";
-
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import MenuScreen from "./screens/MenuScreen";
+import MainScreen from "./screens/MainScreen";
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 function AuthStack() {
   return (
@@ -48,11 +51,10 @@ function AuthStack() {
         name="AuthenticatedStack"
         component={AuthenticatedStack}
         options={{
-          headerShown: false, // Hide the header of AuthenticatedStack
+          headerShown: false,
         }}
       />
     </Stack.Navigator>
-    
   );
 }
 
@@ -63,12 +65,35 @@ function AuthenticatedStack() {
         headerStyle: { backgroundColor: Colors.primary500 },
         headerTintColor: "white",
         contentStyle: { backgroundColor: Colors.primary100 },
-        headerShown: false
+        headerShown: false,
       }}
     >
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
     </Stack.Navigator>
+
+    // <Drawer.Navigator
+    //   screenOptions={{
+    //     headerStyle: { backgroundColor: Colors.primary200 },
+    //   }}
+    // >
+    //   <Drawer.Screen name="Menu" component={MenuScreen} />
+    //   <Drawer.Screen name="Main" component={MainStack} />
+    // </Drawer.Navigator>
   );
+}
+
+function MainStack() {
+  return;
+  <Stack.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: Colors.primary500 },
+      headerTintColor: "white",
+      contentStyle: { backgroundColor: Colors.primary100 },
+      headerShown: false,
+    }}
+  >
+    <Stack.Screen name="Welcome" component={WelcomeScreen} />
+  </Stack.Navigator>;
 }
 
 function Navigation() {
@@ -154,7 +179,7 @@ export default function App() {
 
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <LinearGradient
         colors={[Colors.primary300, Colors.primary200]}
         style={styles.rootScreen}
@@ -167,8 +192,8 @@ export default function App() {
         >
           <SafeAreaView style={styles.safeAreaView}>
             {/* <BackgrounOverlay> */}
-              <Navigation />
-              {/* <AuthContent /> */}
+            <Navigation />
+            {/* <AuthContent /> */}
             {/* </BackgrounOverlay> */}
           </SafeAreaView>
         </ImageBackground>

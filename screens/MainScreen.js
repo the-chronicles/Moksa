@@ -1,16 +1,15 @@
 import { StyleSheet, Text, View } from "react-native";
-import MyCarousel from "../components/UI/Carousel";
-import Colors from "../constants/colors";
 
-function MenuScreen() {
+function MainScreen() {
   return (
     <View style={styles.rootContainer}>
-      <MyCarousel />
+      <Text style={styles.title}>Welcome!</Text>
+      <Text>You authenticated successfully!!</Text>
     </View>
   );
 }
 
-export default MenuScreen;
+export default MainScreen;
 
 const styles = StyleSheet.create({
   rootContainer: {
@@ -18,7 +17,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 32,
-    // backgroundColor: Colors.primary400,
   },
   title: {
     fontSize: 20,

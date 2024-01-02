@@ -12,21 +12,34 @@ import {
 } from "react-native-paper";
 import Colors from "../../constants/colors";
 import PrimaryButton from "./Buttons/PrimaryButton";
+import IconButton from "./Buttons/IconButton";
 
 function DrawerContent() {
   return (
     <View style={styles.container}>
       <DrawerContentScrollView>
-        <View>
-          <Text> Main</Text>
+        <View style={styles.container}>
+          <View>
+            <View>
+                <Text>Notifications</Text>
+            </View>
+            <View>
+                <Text>Coming Soon</Text>
+                <Text>New Releases</Text>
+                <Text>Events</Text>
+                <Text>Food Trucks</Text>
+                <Text>Member Notifications</Text>
+                <Text>Advocator Notifications</Text>
+            </View>
+          </View>
         </View>
       </DrawerContentScrollView>
       <Drawer.Section>
         <DrawerItem
           label="Log Out"
           onPress={() => {}}
-          icon={() => {
-            <PrimaryButton>Log Out</PrimaryButton>;
+          icon={({ color, size }) => {
+            <IconButton icon="log-out-outline" color={color} size={size} />;
           }}
         />
       </Drawer.Section>

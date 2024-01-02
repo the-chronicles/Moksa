@@ -1,6 +1,7 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import Colors from "../../constants/colors";
+import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
 const MyCarousel = () => {
   const data = [
@@ -34,8 +35,6 @@ const MyCarousel = () => {
       subtitle: "Here's where Moksa will be",
       image: require("../../assets/images/moksaschedule.png"),
     },
-    
-    // Add more items as needed
   ];
 
   const renderItem = ({ item }) => (

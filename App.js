@@ -106,8 +106,9 @@ function Navigation() {
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    gilroy: require("./assets/fonts/Gilroy-Regular.ttf"),
-    tradeGothic: require("./assets/fonts/TradeGothic LT Regular.ttf"),
+    "gilroy": require("./assets/fonts/Gilroy-Regular.ttf"),
+    "gilroy-bold": require("./assets/fonts/Gilroy-Bold.ttf"),
+    "tradeGothic": require("./assets/fonts/TradeGothic LT Regular.ttf"),
   });
 
   // if (!fontsLoaded) {

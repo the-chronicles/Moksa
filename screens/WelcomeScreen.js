@@ -6,6 +6,7 @@ import MenuScreen from "./MenuScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import MainScreen from "./MainScreen";
 import IconButton from "../components/UI/Buttons/IconButton";
+import DrawerContent from "../components/UI/DrawerContent";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -25,6 +26,8 @@ function DrawerNavigator() {
         },
         headerTitleAlign: "center",
       }}
+
+      drawerContent={() => <DrawerContent />}
     >
       <Drawer.Screen
         name="Menu"

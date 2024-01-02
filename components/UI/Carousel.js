@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.primary200,
     borderRadius: 40,
-    elevation: 3,
+    // elevation: 3,
   },
   image: {
     width: 315,
@@ -83,15 +83,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    fontFamily: "gilroy",
-    fontWeight: "bold",
+    fontFamily: "gilroy-bold",
     color: "white",
     //   marginTop: 10,
   },
   date: {
     fontSize: 16,
-    fontWeight: "bold",
-    fontFamily: "gilroy",
+    fontFamily: "gilroy-bold",
     color: "white",
     margin: 10
   },

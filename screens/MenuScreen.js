@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
-import MyCarousel from "../components/UI/Carousel";
+// import MyCarousel from "../components/UI/Carousel";
 import Colors from "../constants/colors";
+import MyCarousel from "../components/UI/Carousel";
 
 function MenuScreen() {
   return (

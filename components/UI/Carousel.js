@@ -97,7 +97,6 @@ const MyCarousel = () => {
         renderItem={renderItem}
         sliderWidth={400}
         itemWidth={350}
-        
       />
       <ModalDetail
         visible={modalVisible}

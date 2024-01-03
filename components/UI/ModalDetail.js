@@ -6,8 +6,11 @@ import {
   View,
   Image,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import Colors from "../../constants/colors";
+// import MyCarousel from "./Carousel";
+import InnerCarousel from "./InnerCarousel";
 
 function ModalDetail({ visible, onRequestClose, item }) {
   const [innerModalVisible, setInnerModalVisible] = useState(false);
@@ -59,9 +62,18 @@ function ModalDetail({ visible, onRequestClose, item }) {
             onRequestClose={closeInnerModal}
           >
             <View style={styles.modalContainer}>
-              <View style={styles.detailContainer}>
-                <Image source={item.image} style={styles.image} />
-              </View>
+              <ScrollView>
+                <View style={styles.detailContainer}>
+                  <Image source={item.image} style={styles.image} />
+                  <Text style={styles.newText}>
+                    Come have a blast at our after-halloween costume party. Make
+                    sure to invite a friend! (There will be beer)
+                  </Text>
+
+                  {/* <InnerCarousel /> */}
+                  <View style={styles.line} />
+                </View>
+              </ScrollView>
             </View>
           </Modal>
         </View>
@@ -103,5 +115,8 @@ const styles = StyleSheet.create({
     borderBottomColor: "white",
     borderBottomWidth: 1,
     marginVertical: 10,
+  },
+  newText: {
+    color: "white",
   },
 });

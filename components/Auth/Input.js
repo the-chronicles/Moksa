@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     // paddingVertical: 8,
     // paddingHorizontal: 6,
     padding: 20,
-    backgroundColor: Colors.primary400,
+    backgroundColor: Colors.primary100,
     borderRadius: 2,
     fontSize: 16,
     fontFamily: "gilroy",

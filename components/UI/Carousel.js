@@ -1,9 +1,21 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Carousel from "react-native-snap-carousel";
 import Colors from "../../constants/colors";
-import { ViewPropTypes } from 'deprecated-react-native-prop-types';
+import { ViewPropTypes } from "deprecated-react-native-prop-types";
+import { useState } from "react";
+import ModalDetails from "../ModalDetails";
 
 const MyCarousel = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+
   const data = [
     {
       title: "18 BEERS AVAILABLE",
@@ -37,24 +49,47 @@ const MyCarousel = () => {
     },
   ];
 
-  const renderItem = ({ item }) => (
-    <View style={styles.slide}>
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.date}>{item.subdate}</Text>
-        <Text style={styles.subtitle}>{item.subtitle}</Text>
+  const renderItem = ({ item, index }) => (
+    <TouchableOpacity onPress={() => handleItemPress(item)} style={styles.slide}>
+      <View style={styles.slide}>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.date}>{item.subdate}</Text>
+          <Text style={styles.subtitle}>{item.subtitle}</Text>
+        </View>
+        <Image source={item.image} style={styles.image} />
       </View>
-      <Image source={item.image} style={styles.image} />
-    </View>
+    </TouchableOpacity>
   );
 
+  const handleItemPress = (item) => {
+    setSelectedItem(item);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setSelectedItem(null);
+  };
+
   return (
-    <Carousel
-      data={data}
-      renderItem={renderItem}
-      sliderWidth={400}
-      itemWidth={350}
-    />
+    <View>
+      <Carousel
+        data={data}
+        renderItem={renderItem}
+        sliderWidth={400}
+        itemWidth={350}
+      />
+      {/* <Modal
+        isVisible={modalVisible}
+        onBackdropPress={closeModal}
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
+        useNativeDriver
+      >
+        <ModalDetails item={selectedItem} closeModal={closeModal} />
+      </Modal> */}
+    </View>
   );
 };
 
@@ -90,7 +125,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "gilroy-bold",
     color: "white",
-    margin: 10
+    margin: 10,
   },
   subtitle: {
     fontSize: 16,

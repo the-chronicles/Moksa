@@ -66,9 +66,10 @@ function AuthenticatedStack() {
         headerTintColor: "white",
         contentStyle: { backgroundColor: Colors.primary100 },
         headerShown: false,
+        presentation: "modal",
       }}
     >
-      <Stack.Screen name="Welcome" component={WelcomeScreen} />
+      <Stack.Screen name="Welcome" component={WelcomeScreen} options={{presentation: 'modal'}} />
     </Stack.Navigator>
 
     // <Drawer.Navigator
@@ -106,9 +107,9 @@ function Navigation() {
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    "gilroy": require("./assets/fonts/Gilroy-Regular.ttf"),
+    gilroy: require("./assets/fonts/Gilroy-Regular.ttf"),
     "gilroy-bold": require("./assets/fonts/Gilroy-Bold.ttf"),
-    "tradeGothic": require("./assets/fonts/TradeGothic LT Regular.ttf"),
+    tradeGothic: require("./assets/fonts/TradeGothic LT Regular.ttf"),
   });
 
   // if (!fontsLoaded) {

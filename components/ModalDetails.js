@@ -1,20 +1,35 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import Colors from '../constants/colors';
+import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
+import Colors from "../constants/colors";
 
-const ModalDetails = ({ item, closeModal }) => {
+const ModalDetails = ({ item, closeModal, visible }) => {
   if (!item) return null;
 
   return (
-    <View style={styles.modalContainer}>
-      <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.date}>{item.subdate}</Text>
-      <Text style={styles.subtitle}>{item.subtitle}</Text>
-      <Image source={item.image} style={styles.image} />
-      <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
-        <Text style={styles.closeButtonText}>Close</Text>
-      </TouchableOpacity>
-    </View>
+    <Modal
+      visible={visible}
+      // transparent
+      animationType="slide"
+      onRequestClose={closeModal}
+
+    >
+      <View style={styles.modalContainer}>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.date}>{item.subdate}</Text>
+        <Text style={styles.subtitle}>{item.subtitle}</Text>
+        <Image source={item.image} style={styles.image} />
+        <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
+          <Text style={styles.closeButtonText}>Close</Text>
+        </TouchableOpacity>
+      </View>
+    </Modal>
   );
 };
 
@@ -23,23 +38,24 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary200,
     padding: 20,
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: "center",
+    flex: 1,
   },
   title: {
     fontSize: 28,
-    fontFamily: 'gilroy-bold',
-    color: 'white',
+    fontFamily: "gilroy-bold",
+    color: "white",
   },
   date: {
     fontSize: 16,
-    fontFamily: 'gilroy-bold',
-    color: 'white',
+    fontFamily: "gilroy-bold",
+    color: "white",
     margin: 10,
   },
   subtitle: {
     fontSize: 16,
-    fontFamily: 'gilroy',
-    color: 'white',
+    fontFamily: "gilroy",
+    color: "white",
   },
   image: {
     width: 300,
@@ -54,9 +70,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   closeButtonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    fontFamily: 'gilroy-bold',
+    fontFamily: "gilroy-bold",
   },
 });
 

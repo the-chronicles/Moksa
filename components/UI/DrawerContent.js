@@ -21,15 +21,15 @@ function DrawerContent() {
         <View style={styles.container}>
           <View>
             <View>
-                <Text>Notifications</Text>
+              <Text>Notifications</Text>
             </View>
             <View>
-                <Text>Coming Soon</Text>
-                <Text>New Releases</Text>
-                <Text>Events</Text>
-                <Text>Food Trucks</Text>
-                <Text>Member Notifications</Text>
-                <Text>Advocator Notifications</Text>
+              <Text>Coming Soon</Text>
+              <Text>New Releases</Text>
+              <Text>Events</Text>
+              <Text>Food Trucks</Text>
+              <Text>Member Notifications</Text>
+              <Text>Advocator Notifications</Text>
             </View>
           </View>
         </View>
@@ -52,6 +52,7 @@ export default DrawerContent;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Colors.primary400,
   },
   bottomDrawerSection: {
     marginBottom: 15,

@@ -64,13 +64,15 @@ function ModalDetail({ visible, onRequestClose, item }) {
             <View style={styles.modalContainer}>
               <ScrollView>
                 <View style={styles.detailContainer}>
-                  <Image source={item.image} style={styles.image} />
+                  {/* <Image source={item.image} style={styles.image} /> */}
+                  <InnerCarousel /> 
                   <Text style={styles.newText}>
                     Come have a blast at our after-halloween costume party. Make
                     sure to invite a friend! (There will be beer)
                   </Text>
 
-                  {/* <InnerCarousel /> */}
+
+
                   <View style={styles.line} />
                 </View>
               </ScrollView>

@@ -1,6 +1,15 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Carousel from "react-native-snap-carousel";
 import Colors from "../../constants/colors";
+import ModalDetail from "./ModalDetail";
+import { useState } from "react";
 
 const data = [
   {
@@ -42,7 +51,22 @@ const data = [
 ];
 
 function InnerCarousel() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedItem, setSelectedItem] = useState([]);
+
+  const handleItemPress = (item) => {
+    setSelectedItem(item);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setSelectedItem(null);
+  };
+
+
   const renderItem = ({ item, index }) => (
+    // <ScrollView>
     <TouchableOpacity
       onPress={() => handleItemPress(item)}
       style={styles.slide}
@@ -53,9 +77,10 @@ function InnerCarousel() {
         </View>
         <Image source={item.image} style={styles.image} />
       </View>
-          <Text style={styles.date}>{item.subdate}</Text>
-          <Text style={styles.subtitle}>{item.subtitle}</Text>
+      <Text style={styles.date}>{item.subdate}</Text>
+      <Text style={styles.subtitle}>{item.subtitle}</Text>
     </TouchableOpacity>
+    // </ScrollView>
   );
 
   return (
@@ -64,7 +89,12 @@ function InnerCarousel() {
         data={data}
         renderItem={renderItem}
         sliderWidth={400}
-        itemWidth={350}
+        itemWidth={245}
+      />
+      <ModalDetail
+        visible={modalVisible}
+        onRequestClose={closeModal}
+        item={selectedItem}
       />
     </View>
   );
@@ -77,17 +107,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: Colors.primary200,
-    borderRadius: 40,
+    // backgroundColor: Colors.primary200,
+    // borderRadius: 40,
     // elevation: 3,
   },
   image: {
-    width: 315,
-    height: 540,
-    borderRadius: 30,
+    width: 250,
+    height: 270,
+    // borderRadius: 30,
     // margin: 40,
     // marginVertical: 10,
-    top: 10,
+    // top: 10,
   },
   textContainer: {
     alignItems: "center",

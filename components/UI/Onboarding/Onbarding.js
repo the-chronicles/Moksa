@@ -2,8 +2,16 @@ import { LinearGradient } from "expo-linear-gradient";
 import Colors from "../../../constants/colors";
 import { ImageBackground, StyleSheet } from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
+import { useState } from "react";
 
 function Onbarding() {
+  const [showOnboarding, setShowOnboarding] = useState(true)
+  
+  const renderNextButton = () => {
+    return {
+      
+    }
+  }
   return (
     <LinearGradient
       colors={[Colors.primary300, Colors.primary300]}

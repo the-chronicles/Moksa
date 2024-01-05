@@ -1,5 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { Image, ImageBackground, SafeAreaView, StyleSheet } from "react-native";
+import {
+  Image,
+  ImageBackground,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
 import { useState } from "react";
@@ -18,6 +26,7 @@ import WelcomeScreen from "./screens/WelcomeScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import MenuScreen from "./screens/MenuScreen";
 import MainScreen from "./screens/MainScreen";
+import PrimaryButton from "./components/UI/Buttons/PrimaryButton";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -69,7 +78,11 @@ function AuthenticatedStack() {
         presentation: "modal",
       }}
     >
-      <Stack.Screen name="Welcome" component={WelcomeScreen} options={{presentation: 'modal'}} />
+      <Stack.Screen
+        name="Welcome"
+        component={WelcomeScreen}
+        options={{ presentation: "modal" }}
+      />
     </Stack.Navigator>
 
     // <Drawer.Navigator
@@ -105,6 +118,35 @@ function Navigation() {
   );
 }
 
+const Next = ({ ...props }) => (
+  <View style={styles.nextContainer}>
+    <TouchableOpacity style={styles.nextButton} {...props}>
+      <Text style={styles.nextButtonText}>Next</Text>
+    </TouchableOpacity>
+  </View>
+
+  // <PrimaryButton style={styles.nextContainer}>NExt</PrimaryButton>
+);
+
+const CustomDoneButton = ({ ...props }) => (
+  <View style={styles.doneContainer}>
+    <TouchableOpacity style={styles.doneButton} {...props}>
+      <Text style={styles.doneButtonText}>Log In</Text>
+    </TouchableOpacity>
+  </View>
+);
+
+const Dots = ({ selected }) => (
+  <View
+    style={[
+      styles.dot,
+      {
+        backgroundColor: selected ? Colors.primary100 : Colors.primary200,
+      },
+    ]}
+  />
+);
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     gilroy: require("./assets/fonts/Gilroy-Regular.ttf"),
@@ -130,19 +172,36 @@ export default function App() {
           style={styles.rootScreen}
           imageStyle={styles.backgroundImage}
         >
+          <Text>Skip</Text>
           <Onboarding
             onSkip={() => setShowOnboarding(false)}
             pages={[
               {
                 backgroundColor: "transparent",
                 image: (
-                  <Image
-                    source={require("./assets/images/notifications.png")}
-                    style={styles.onboardingImage}
-                  />
-                ),
-                title: "Welcome",
-                subtitle: "",
+                    <Image
+                      source={require("./assets/images/notifications.png")}
+                      style={styles.onboardingImage}
+                    />
+                  ),
+                  title: "CUSTOMIZED PUSH NOTIFICATIONS FOR EVERY ACCOUNT",
+                  subtitle: "Know when beers are released",
+
+                  // <View style={styles.onboardingPage}>
+                  //   <View style={styles.textContainer}>
+                  //     <Text style={styles.onboardingTitle}>
+                  //       CUSTOMIZED PUSH NOTIFICATIONS FOR EVERY ACCOUNT
+                  //     </Text>
+                  //     <Text style={styles.onboardingSubtitle}>
+                  //       Know when beers are released
+                  //     </Text>
+                  //   </View>
+                  //   <Image
+                  //     source={require("./assets/images/notifications.png")}
+                  //     style={styles.onboardingImage}
+                  //   />
+                  // </View>
+                
               },
               {
                 backgroundColor: "transparent",
@@ -152,8 +211,8 @@ export default function App() {
                     style={styles.onboardingImage}
                   />
                 ),
-                title: "Welcome",
-                subtitle: ".",
+                title: "TAKE PHOTOS AND ADD EXCLUSIVE PHOTO FRAMES",
+                subtitle: "Add some personality to your shots",
               },
               {
                 backgroundColor: "transparent",
@@ -163,16 +222,19 @@ export default function App() {
                     style={styles.onboardingImage}
                   />
                 ),
-                title: "Welcome",
-                subtitle: ".",
+                title: "CHECK-IN ON SOCIAL MEDIA. YUP, INCLUDING UNTAPPD",
+                subtitle: "Tell your people when you're at Moksa",
               },
               // Add more pages as needed
             ]}
             onDone={() => setShowOnboarding(false)}
             skipLabel=""
-            nextLabel="" // Empty string to hide the next button
+            // nextLabel="" // Empty string to hide the next button
             bottomBarHighlight={false}
             bottomBarHeight={60}
+            NextButtonComponent={Next}
+            DotComponent={Dots}
+            DoneButtonComponent={CustomDoneButton}
           />
         </ImageBackground>
       </LinearGradient>
@@ -230,4 +292,49 @@ const styles = StyleSheet.create({
   //   width: 200,
   //   height: 200,
   // },
+  nextContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 25,
+    marginBottom: 10,
+  },
+  nextButton: {
+    backgroundColor: Colors.accent100,
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 180,
+    // marginRight: 175,
+  },
+  nextButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    fontFamily: "gilroy",
+  },
+
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 5,
+    marginHorizontal: 20,
+    marginBottom: 200,
+  },
+  doneContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 16, // Adjust the margin as needed
+  },
+  doneButton: {
+    backgroundColor: Colors.accent100,
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+  },
+  doneButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    fontFamily: "gilroy",
+  },
 });

@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import "expo-system-ui";
 import {
   Image,
   ImageBackground,
@@ -179,29 +180,28 @@ export default function App() {
               {
                 backgroundColor: "transparent",
                 image: (
-                    <Image
-                      source={require("./assets/images/notifications.png")}
-                      style={styles.onboardingImage}
-                    />
-                  ),
-                  title: "CUSTOMIZED PUSH NOTIFICATIONS FOR EVERY ACCOUNT",
-                  subtitle: "Know when beers are released",
+                  <Image
+                    source={require("./assets/images/notifications.png")}
+                    style={styles.onboardingImage}
+                  />
+                ),
+                title: "CUSTOMIZED PUSH NOTIFICATIONS FOR EVERY ACCOUNT",
+                subtitle: "Know when beers are released",
 
-                  // <View style={styles.onboardingPage}>
-                  //   <View style={styles.textContainer}>
-                  //     <Text style={styles.onboardingTitle}>
-                  //       CUSTOMIZED PUSH NOTIFICATIONS FOR EVERY ACCOUNT
-                  //     </Text>
-                  //     <Text style={styles.onboardingSubtitle}>
-                  //       Know when beers are released
-                  //     </Text>
-                  //   </View>
-                  //   <Image
-                  //     source={require("./assets/images/notifications.png")}
-                  //     style={styles.onboardingImage}
-                  //   />
-                  // </View>
-                
+                // <View style={styles.onboardingPage}>
+                //   <View style={styles.textContainer}>
+                //     <Text style={styles.onboardingTitle}>
+                //       CUSTOMIZED PUSH NOTIFICATIONS FOR EVERY ACCOUNT
+                //     </Text>
+                //     <Text style={styles.onboardingSubtitle}>
+                //       Know when beers are released
+                //     </Text>
+                //   </View>
+                //   <Image
+                //     source={require("./assets/images/notifications.png")}
+                //     style={styles.onboardingImage}
+                //   />
+                // </View>
               },
               {
                 backgroundColor: "transparent",
@@ -338,7 +338,6 @@ const styles = StyleSheet.create({
     fontFamily: "gilroy",
   },
 
-
   onboardingPage: {
     flex: 1,
     justifyContent: "center",
@@ -364,5 +363,4 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
   },
-  
 });

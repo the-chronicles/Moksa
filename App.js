@@ -337,4 +337,32 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontFamily: "gilroy",
   },
+
+
+  onboardingPage: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  onboardingImage: {
+    width: 200, // Adjust the width as needed
+    height: 200, // Adjust the height as needed
+  },
+  textContainer: {
+    position: "absolute",
+    top: 20, // Adjust the top position as needed
+    alignItems: "center",
+  },
+  onboardingTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
+  },
+  onboardingSubtitle: {
+    fontSize: 16,
+    color: "white",
+    textAlign: "center",
+  },
+  
 });

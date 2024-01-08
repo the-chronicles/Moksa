@@ -79,6 +79,9 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 android {
     ndkVersion rootProject.ext.ndkVersion
 
+    compileSdkVersion 30 // or the version you want to use
+
+
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     namespace 'com.chroniclesmaan.Moksa'

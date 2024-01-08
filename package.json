@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-native-community/viewpager": "^5.0.11",
+    "@react-native/metro-config": "^0.73.3",
     "@react-navigation/drawer": "^6.6.6",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
@@ -18,7 +19,9 @@
     "expo-app-loading": "^2.1.1",
     "expo-font": "~11.4.0",
     "expo-linear-gradient": "~12.3.0",
+    "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
+    "expo-system-ui": "~2.4.0",
     "react": "18.2.0",
     "react-native": "0.72.6",
     "react-native-app-intro-slider": "^4.0.4",
@@ -32,9 +35,7 @@
     "react-native-screens": "~3.22.0",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-splash-screen": "^3.3.0",
-    "react-native-swiper": "^1.6.0",
-    "expo-splash-screen": "~0.20.5",
-    "expo-system-ui": "~2.4.0"
+    "react-native-swiper": "^1.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

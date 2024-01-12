@@ -1,5 +1,10 @@
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import "expo-system-ui";
+
+import * as SplashScreen from "expo-splash-screen";
+// import AppLoading from "expo-app-loading";
+
+// import "expo-system-ui";
 import {
   Image,
   ImageBackground,
@@ -11,26 +16,22 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
-import { useState } from "react";
+// import * as Font from "expo-font";
 
-import AppLoading from "expo-app-loading";
+import Onboarding from "react-native-onboarding-swiper";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import Colors from "./constants/colors";
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 
-import Onboarding from "react-native-onboarding-swiper";
 import WelcomeScreen from "./screens/WelcomeScreen";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import MenuScreen from "./screens/MenuScreen";
-import MainScreen from "./screens/MainScreen";
-import PrimaryButton from "./components/UI/Buttons/PrimaryButton";
 
 const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
+// const Drawer = createDrawerNavigator();
 
 function AuthStack() {
   return (
@@ -149,17 +150,108 @@ const Dots = ({ selected }) => (
 );
 
 export default function App() {
+  // const [fontsLoaded] = useFonts({
+  //   "gilroy": require("./assets/fonts/Gilroy-Regular.ttf"),
+  //   "gilroy-bold": require("./assets/fonts/Gilroy-Bold.ttf"),
+  //   "tradeGothic": require("./assets/fonts/TradeGothic LT Regular.ttf"),
+  // });
+
+  // // if (!fontsLoaded) {
+  // //   return <AppLoading />;
+  // // }
+
+  // // if (!fontsLoaded) {
+  // //   SplashScreen.preventAutoHideAsync(); // Prevent auto-hide splash screen
+  // //   return null; // or any loading indicator
+  // // }
+  // // SplashScreen.hideAsync(); // Hide splash screen when fonts are loaded
+
+  // const [showOnboarding, setShowOnboarding] = useState(true);
+
+  // useEffect(() => {
+  //   const loadFontsAndHideSplash = async () => {
+  //     if (!fontsLoaded) {
+  //       try {
+  //         await SplashScreen.preventAutoHideAsync();
+  //         // Load your fonts here if not loaded yet
+  //         await loadFonts(); // You need to implement the loadFonts function
+  //       } catch (e) {
+  //         console.error(e);
+  //       } finally {
+  //         SplashScreen.hideAsync();
+  //       }
+  //     }
+  //   };
+
+  //   loadFontsAndHideSplash();
+  // }, [fontsLoaded]);
+
+  // const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  // const loadFonts = async () => {
+  //   try {
+  //     await Font.loadAsync({
+  //       gilroy: require("./assets/fonts/Gilroy-Regular.ttf"),
+  //       "gilroy-bold": require("./assets/fonts/Gilroy-Bold.ttf"),
+  //       tradeGothic: require("./assets/fonts/TradeGothic LT Regular.ttf"),
+  //     });
+
+  //     setFontsLoaded(true);
+  //   } catch (error) {
+  //     console.error("Error loading fonts:", error);
+  //   }
+  // };
+
+  // const [showOnboarding, setShowOnboarding] = useState(true);
+
+
+  // const loadFontsAndHideSplash = async () => {
+  //   if (!fontsLoaded) {
+  //     try {
+  //       // Use SplashScreen.preventAutoHideAsync() instead of SplashScreen.preventAutoHideAsync()
+  //       await SplashScreen.preventAutoHideAsync();
+  //       // Load your fonts here if not loaded yet
+  //       await loadFonts(); // You need to implement the loadFonts function
+  //     } catch (error) {
+  //       console.error("Error during font loading:", error);
+  //     } finally {
+  //       // Use SplashScreen.hideAsync() instead of SplashScreen.hideAsync()
+  //       await SplashScreen.hideAsync();
+  //     }
+  //   }
+  // };
+  
+  // useEffect(() => {
+  //   loadFontsAndHideSplash();
+  // }, [fontsLoaded]);
+
   const [fontsLoaded] = useFonts({
     gilroy: require("./assets/fonts/Gilroy-Regular.ttf"),
     "gilroy-bold": require("./assets/fonts/Gilroy-Bold.ttf"),
     tradeGothic: require("./assets/fonts/TradeGothic LT Regular.ttf"),
   });
 
+  const [showOnboarding, setShowOnboarding] = useState(true);
+
+  const loadFontsAndHideSplash = async () => {
+    if (!fontsLoaded) {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+      } catch (error) {
+        console.error("Error during font loading:", error);
+      } finally {
+        await SplashScreen.hideAsync();
+      }
+    }
+  };
+
+  useEffect(() => {
+    loadFontsAndHideSplash();
+  }, [fontsLoaded]);
+
   // if (!fontsLoaded) {
   //   return <AppLoading />;
   // }
-
-  const [showOnboarding, setShowOnboarding] = useState(true);
 
   if (showOnboarding) {
     return (

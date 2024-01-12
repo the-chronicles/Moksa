@@ -69,7 +69,7 @@ const MyCarousel = () => {
       onPress={() => handleItemPress(item)}
       style={styles.slide}
     >
-      <View style={styles.slide}>
+      <View style={ViewPropTypes.viewPropTypes}> 
         <View style={styles.textContainer}>
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.date}>{item.subdate}</Text>

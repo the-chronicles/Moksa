@@ -150,86 +150,36 @@ const Dots = ({ selected }) => (
 );
 
 export default function App() {
-  // const [fontsLoaded] = useFonts({
-  //   "gilroy": require("./assets/fonts/Gilroy-Regular.ttf"),
-  //   "gilroy-bold": require("./assets/fonts/Gilroy-Bold.ttf"),
-  //   "tradeGothic": require("./assets/fonts/TradeGothic LT Regular.ttf"),
-  // });
-
-  // // if (!fontsLoaded) {
-  // //   return <AppLoading />;
-  // // }
-
-  // // if (!fontsLoaded) {
-  // //   SplashScreen.preventAutoHideAsync(); // Prevent auto-hide splash screen
-  // //   return null; // or any loading indicator
-  // // }
-  // // SplashScreen.hideAsync(); // Hide splash screen when fonts are loaded
-
-  // const [showOnboarding, setShowOnboarding] = useState(true);
-
-  // useEffect(() => {
-  //   const loadFontsAndHideSplash = async () => {
-  //     if (!fontsLoaded) {
-  //       try {
-  //         await SplashScreen.preventAutoHideAsync();
-  //         // Load your fonts here if not loaded yet
-  //         await loadFonts(); // You need to implement the loadFonts function
-  //       } catch (e) {
-  //         console.error(e);
-  //       } finally {
-  //         SplashScreen.hideAsync();
-  //       }
-  //     }
-  //   };
-
-  //   loadFontsAndHideSplash();
-  // }, [fontsLoaded]);
-
-  // const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  // const loadFonts = async () => {
-  //   try {
-  //     await Font.loadAsync({
-  //       gilroy: require("./assets/fonts/Gilroy-Regular.ttf"),
-  //       "gilroy-bold": require("./assets/fonts/Gilroy-Bold.ttf"),
-  //       tradeGothic: require("./assets/fonts/TradeGothic LT Regular.ttf"),
-  //     });
-
-  //     setFontsLoaded(true);
-  //   } catch (error) {
-  //     console.error("Error loading fonts:", error);
-  //   }
-  // };
-
-  // const [showOnboarding, setShowOnboarding] = useState(true);
-
-
-  // const loadFontsAndHideSplash = async () => {
-  //   if (!fontsLoaded) {
-  //     try {
-  //       // Use SplashScreen.preventAutoHideAsync() instead of SplashScreen.preventAutoHideAsync()
-  //       await SplashScreen.preventAutoHideAsync();
-  //       // Load your fonts here if not loaded yet
-  //       await loadFonts(); // You need to implement the loadFonts function
-  //     } catch (error) {
-  //       console.error("Error during font loading:", error);
-  //     } finally {
-  //       // Use SplashScreen.hideAsync() instead of SplashScreen.hideAsync()
-  //       await SplashScreen.hideAsync();
-  //     }
-  //   }
-  // };
-  
-  // useEffect(() => {
-  //   loadFontsAndHideSplash();
-  // }, [fontsLoaded]);
-
   const [fontsLoaded] = useFonts({
     gilroy: require("./assets/fonts/Gilroy-Regular.ttf"),
     "gilroy-bold": require("./assets/fonts/Gilroy-Bold.ttf"),
     tradeGothic: require("./assets/fonts/TradeGothic LT Regular.ttf"),
   });
+
+  /* Alternative for the onboarding
+  const onboardingPages = [
+    {
+      backgroundColor: "transparent",
+      pageContent: (
+        <View style={styles.onboardingPage}>
+          <View style={styles.textContainer}>
+            <Text style={styles.onboardingTitle}>
+              CUSTOMIZED PUSH NOTIFICATIONS FOR EVERY ACCOUNT
+            </Text>
+            <Text style={styles.onboardingSubtitle}>
+              Know when beers are released
+            </Text>
+          </View>
+          <Image
+            source={require("./assets/images/notifications.png")}
+            style={styles.onboardingImage}
+          />
+        </View>
+      ),
+    },
+    
+  ];
+*/
 
   const [showOnboarding, setShowOnboarding] = useState(true);
 
@@ -265,7 +215,7 @@ export default function App() {
           style={styles.rootScreen}
           imageStyle={styles.backgroundImage}
         >
-          <Text>Skip</Text>
+          <Text>Skisp</Text>
           <Onboarding
             onSkip={() => setShowOnboarding(false)}
             pages={[
@@ -328,6 +278,21 @@ export default function App() {
             DotComponent={Dots}
             DoneButtonComponent={CustomDoneButton}
           />
+
+          
+          {/* <Onboarding
+            onSkip={() => setShowOnboarding(false)}
+            pages={onboardingPages}
+            onDone={() => setShowOnboarding(false)}
+            skipLabel=""
+            bottomBarHighlight={false}
+            bottomBarHeight={60}
+            NextButtonComponent={Next}
+            DotComponent={Dots}
+            DoneButtonComponent={CustomDoneButton}
+          /> */}
+
+          
         </ImageBackground>
       </LinearGradient>
     );
